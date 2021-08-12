@@ -195,6 +195,14 @@ else
     exit 100
 fi
 
+        # Add git submodules (specifically, Mkdtboimg.py)       
+        if [ -f scripts/ufdt/libufdt/utils/src/mkdtboimg.py ]; then
+            echo "mkdtboimg exists, skipping..."
+        else
+            echo "mkdtboimg doesn't exists, running submodule update..."
+            git submodule update --init --recursive
+        fi
+
 cd "$workdir"/"$kernel_path" || exit 127
 start_time="$(date +%s)"
 date="$(date +%d%m%Y-%I%M)"
